@@ -1,3 +1,17 @@
+Beloi is a library for connecting SC applications over OSC by registering named resources.  A resource is a named placeholder that is known to all applications in a network.
+
+To send data to the resource, an application evaluates the expression:
+
+: Subscriber.put(\resourceName, data);
+
+To receive (i.e. listen to) data set to a resource, an application evaluates the expression:
+
+: Subscriber.addAttributeAction(\resourceName, { | data | /* do something here */ });
+
+These are all the pieces of code that are needed to connect a sender and a receiver on the network, so that the sender can send data on a named resource, and the receiver can receive the data sent, and perform the required action whenever a new item is received.
+
+Multiple applications can send to the same "resource" and multiple applications can listen to the same "resource".
+
 * Abstract
 :PROPERTIES:
 :DATE:     <2014-08-08 Fri 09:38>
@@ -58,7 +72,7 @@ Action 1: Post the received value:
 Subscriber.addUpdateAction(\degreePoster, \degree, { | data |
    postf("The degree value received is: %\n", data);
 });
-#+End_example
+#+END_EXAMPLE
 
 Action 2: Display the received value on a GUI
 
